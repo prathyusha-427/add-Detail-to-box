@@ -1,0 +1,134 @@
+<html>
+<body>
+	FullName:<input type = "text" id = "ip1">
+	ContactNo:<input type = "text" id = "ip2">
+	EmailId:<input type = "text" id = "ip3">
+	<button onclick = "abc()" id = "b1">AddDetails</button>
+	<button id = "b2">SaveDetails</button>
+	<button id = "b3">asc</button>
+	<button id = "b4">dec</button>
+	<table id = "t1" border = 1></table>
+<script>
+	var NewDetails = [];
+	if(localStorage.getItem("name")){
+		NewDetails = JSON.parse(localStorage.getItem("name"));
+	}
+	var ascOrder = document.getElementById("b3");
+	var decOrder = document.getElementById("b4");
+	var text1 = document.getElementById("ip1");
+	var text2 = document.getElementById("ip2");
+	var text3 = document.getElementById("ip3");
+	var tble = document.getElementById("t1");
+	var add = document.getElementById("b1");
+	var save = document.getElementById("b2");
+	add.style.display = "block";
+	save.style.display = "none";
+	createTable();
+	function createTable(){
+	tble.innerHTML = "";
+		var tableRow = document.createElement("tr");
+		var header1 = document.createElement("th");
+		var header2 = document.createElement("th");
+		var header3 = document.createElement("th");
+		var header4 = document.createElement("th");
+		var header5 = document.createElement("th");
+		header1.innerHTML = "FullName";
+		header2.innerHTML = "ContactNo";
+		header3.innerHTML = "EmailId";
+		header4.innerHTML = "Modify";
+		header5.innerHTML = "Remove";
+		tableRow.appendChild(header1);
+		tableRow.appendChild(header2);
+		tableRow.appendChild(header3);
+		tableRow.appendChild(header4);
+		tableRow.appendChild(header5);
+		tble.appendChild(tableRow);
+		NewDetails.forEach((a,i)=>{
+			var newRow = document.createElement("tr");
+			var data1=document.createElement("td");
+			var data2=document.createElement("td");
+			var data3=document.createElement("td");
+			var data4=document.createElement("td");
+			var data5=document.createElement("td");
+			var btn=document.createElement("button");
+			var btn1=document.createElement("button");
+			data1.innerHTML = a.name;
+			data2.innerHTML = a.contact;
+			data3.innerHTML = a.emailid;
+			data4.appendChild(btn);
+			data5.appendChild(btn1);
+			btn.innerHTML = "Edit";
+			btn1.innerHTML = "Delete";
+			btn1.onclick=()=>{
+				NewDetails.splice(i,1);
+				localStorage.setItem("name",JSON.stringify(NewDetails));
+				createTable();
+			}
+			btn.onclick=()=>{
+				text1.value = a.name;
+				text2.value = a.contact;
+				text3.value = a.emailid;
+				save.style.display = "block";
+				add.style.display = "none";
+			save.onclick=()=>{
+			var ob= {
+				name : text1.value,
+				contact : text2.value,
+				emailid : text3.value
+			};
+			NewDetails[i] = ob;
+			localStorage.setItem("name",JSON.stringify(NewDetails));
+			createTable();
+			save.style.display = "none";
+			add.style.display = "block";
+			}
+			}
+			ascOrder.onclick=()=>{
+				NewDetails.sort(function(a,b){
+				var letter1 = a.name.toUpperCase();
+				var letter2 = b.name.toUpperCase();
+				if(letter1 < letter2){
+					return -1;
+				}
+				if(letter1 > letter2){
+					return 1;
+				}
+				return 0;
+			});
+			createTable();
+			}
+			decOrder.onclick=()=>{
+				NewDetails.sort(function(a,b){
+				var letter1 = a.name.toUpperCase();
+				var letter2 = b.name.toUpperCase();
+				if(letter1 > letter2){
+					return -1;
+				}
+				if(letter1 < letter2){
+					return 1;
+				}
+				return 0;
+			});
+			createTable();
+			}
+			newRow.appendChild(data1);
+			newRow.appendChild(data2);
+			newRow.appendChild(data3);
+			newRow.appendChild(data4);
+			newRow.appendChild(data5);
+			tble.appendChild(newRow);
+		})
+	}
+	function abc(){
+		var newobject = {
+			name:text1.value,
+			contact:text2.value,
+			emailid:text3.value
+		};
+		NewDetails.push(newobject);
+		createTable();
+		localStorage.setItem("name",JSON.stringify(NewDetails));
+	}
+</script>
+</body>
+</html>

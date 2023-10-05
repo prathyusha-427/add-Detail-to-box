@@ -1,0 +1,78 @@
+<html>
+<body>
+	Name:<input type = "text" id = "t1">
+	Place:<input type = "text" id = "t2">
+	AdharNo:<input type = "text" id = "t3">
+	<button onclick = "abc()">Add</button>
+	<table id = "t4" border = "1"></table>
+<script>
+	var updateArray = [];
+	var text1 = document.getElementById("t1");
+	var text2 = document.getElementById("t2");
+	var text3 = document.getElementById("t3");
+	var tble = document.getElementById("t4");	
+	newTable();
+	function newTable(){
+	tble.innerHTML = "";
+		var tableRow = document.createElement("tr");
+		var header1 = document.createElement("th");
+		var header2 = document.createElement("th");
+		var header3 = document.createElement("th");
+		var header4 = document.createElement("th");
+		var header5 = document.createElement("th");
+		header1.innerHTML = "Name";
+		header2.innerHTML = "Place";
+		header3.innerHTML = "AdharNo";
+		header4.innerHTML = "Modify";
+		header5.innerHTML = "Remove";
+		tableRow.appendChild(header1);
+		tableRow.appendChild(header2);
+		tableRow.appendChild(header3);
+		tableRow.appendChild(header4);
+		tableRow.appendChild(header5);
+		tble.appendChild(tableRow);
+		updateArray.forEach((a,i)=>{
+			var newRow = document.createElement("tr");
+			var data1=document.createElement("td");
+			var data2=document.createElement("td");
+			var data3=document.createElement("td");
+			var data4=document.createElement("td");
+			var data5=document.createElement("td");
+			var btn=document.createElement("button");
+			var btn1=document.createElement("button");
+			data1.innerHTML = a.name;
+			data2.innerHTML = a.place;
+			data3.innerHTML = a.adno;
+			data4.appendChild(btn);
+			data5.appendChild(btn1);
+			btn.innerHTML = "Edit";
+			btn1.innerHTML = "Delete";
+			btn1.onclick=()=>{
+				updateArray.splice(i,1);
+				newTable();
+			}
+			btn.onclick=()=>{
+				text1.value = a.name;
+				text2.value = a.place;
+				text3.value = a.adno;
+			}
+			newRow.appendChild(data1);
+			newRow.appendChild(data2);
+			newRow.appendChild(data3);
+			newRow.appendChild(data4);
+			newRow.appendChild(data5);
+			tble.appendChild(newRow);
+		})
+	}
+	function abc(){
+		var newobject = {
+			name:text1.value,
+			place:text2.value,
+			adno:text3.value
+		};
+		updateArray.push(newobject);
+		newTable();
+	}
+</script>
+</body>
+</html>

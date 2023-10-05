@@ -1,0 +1,35 @@
+<html>
+	<body>
+		<input type="text" id="s1" placeholder="Name">
+		<input type="text" id="s2" placeholder="Rollnumber">
+		<button onclick="add(event)">Add Student</button><br>
+		<table id="tb" border="1">
+			<tr>
+				<th>Student Name</th>
+				<th>Roll number</th>
+			</tr>
+		</table>
+       		
+	<script>
+	var newRow=document.getElementById("tb");
+	newRow.style.display='none';
+	var showTable = false;
+	function add(e){	
+	var x = document.getElementById("s1").value;
+	var y = document.getElementById("s2").value;
+	showTable = true;
+	if(showTable){
+		newRow.style.display='inline-block';
+	}
+		var tableRow = document.createElement("tr");
+		var data1=document.createElement("td");
+		var data2=document.createElement("td");
+		data1.innerHTML=x;
+		data2.innerHTML=y;
+		tableRow.appendChild(data1);
+		tableRow.appendChild(data2);		
+		newRow.appendChild(tableRow);
+	}
+	</script>
+</body>
+</html>

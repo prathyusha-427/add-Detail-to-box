@@ -1,0 +1,99 @@
+<html>
+<head>
+	<style>
+	#p1{
+		display:none;
+		color:red;
+	}
+	#p2{
+		display:none;
+		color:red;
+	}
+	</style>
+</head>
+	<body>
+		<input type="text" id="s1" placeholder="Name">
+		<p id="p1">*Studentname should not have numbers</p>
+		<input type="text" id="s2" placeholder="Rollnumber">
+		<p id="p2">*Rollno should not have letters</p>
+		<button onclick="add()">Add Student</button><br>
+		<table id="tb" border="1">
+		</table>     		
+	<script>
+	var emptyarray=[];
+		var newRow=document.getElementById("tb");
+	if(localStorage.getItem("name")){
+	var emptyarray=JSON.parse(localStorage.getItem("name"));
+	genTable();
+	}
+	function genTable(){
+		newRow.innerHTML="";	
+		var tableHead = document.createElement("tr");
+		var tableheader1 = document.createElement("th");
+		var tableheader2 = document.createElement("th");
+		var tableheader3 = document.createElement("th");
+		tableheader1.innerHTML="Student Name";
+		tableheader2.innerHTML="Roll number";
+		tableheader3.innerHTML="options";
+		tableHead.appendChild(tableheader1);
+		tableHead.appendChild(tableheader2);
+		tableHead.appendChild(tableheader3);
+		newRow.appendChild(tableHead);
+		
+		emptyarray.forEach((a,i)=>{
+	var tableRow = document.createElement("tr");
+	var data1=document.createElement("td");
+	var data2=document.createElement("td");
+	var data3=document.createElement("td");
+	var btn=document.createElement("button");
+	btn.innerHTML="Delete";
+	data1.innerHTML=a.name;
+	data2.innerHTML=a.rollnum;
+	data3.appendChild(btn) ;
+	btn.onclick=()=>{
+		emptyarray.splice(i,1);
+		genTable();
+		localStorage.setItem("name",JSON.stringify(emptyarray));
+	}
+	tableRow.appendChild(data1);
+	tableRow.appendChild(data2);				
+	tableRow.appendChild(data3);				
+	newRow.appendChild(tableRow);
+		})
+	}
+	function add(){	
+	var sn = false;
+	var rn = false;
+	var x = document.getElementById("s1").value;
+	var y = document.getElementById("s2").value;
+	var m = document.getElementById("p1");
+	var p = document.getElementById("p2");
+	m.style.display="none";
+	p.style.display="none";
+	if(/[0-9]/.test(x)|| x == ""){
+		m.style.display="block";
+	}
+	else{
+		m.style.display="none";
+		sn = true;
+	}
+	if(/([A-Za-z])/.test(y) || y == ""){
+		p.style.display="block";
+	}
+	else{
+		p.style.display= "none";
+		rn = true;
+	}
+	if(sn == true && rn == true){
+	var object={
+			name:x,
+			rollnum:y			
+		};
+	emptyarray.push(object);
+	genTable();
+	localStorage.setItem("name",JSON.stringify(emptyarray));
+	}
+	}
+	</script>
+</body>
+</html>

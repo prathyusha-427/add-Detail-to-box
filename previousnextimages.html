@@ -1,0 +1,41 @@
+<html>
+	<style>
+		#i3{
+			width:20%;
+			margin-top:30px;
+			margin-bottom:30px;
+			height:400px;
+		}
+	</style>
+	<body>
+	<center><img id="i3"src=""></center>
+	<center><button onclick="previous()">previous</button>	
+	<button onclick="next()">next</button></center>
+	<script>
+		var arr=["img1.jpg","img2.jpg","img3.jpg","img4.jpg","img5.jpg","img6.jpg"];
+		var i = 0;
+		var y = document.getElementById("i3");
+		y.src=arr[0];
+		function next(){
+			if(i<arr.length-1){
+			i++;
+			y.src=arr[i];
+			}
+		else{
+			i=0;
+			y.src=arr[i];
+		}
+		}
+		function previous(){
+			i--;
+			if(i>0){
+			y.src=arr[i];
+			}
+			else{
+			i=arr.length-1;
+			y.src=arr[i];
+			}
+		}
+	</script>
+	</body>
+</html>

@@ -1,0 +1,48 @@
+<html>
+<body>
+	<input type = "text" placeholder = "StudentName" id = "i1">
+	<button id = "b1" onclick = "add()">Add</button>
+	<table id= "t1" border = "1"></table>
+	<script>
+	var array = [];
+	regen();
+	<!-- t1.style.display="none"; -->
+	var but = document.getElementById("b1");
+	function regen(){
+	var tab = document.getElementById("t1");
+	tab.innerHTML = "";
+	var tableRow = document.createElement("tr");
+	var tableHeading = document.createElement("th");
+	tableHeading.innerHTML = "StudentName";
+	var tableHeading1 = document.createElement("th");
+	tableHeading1.innerHTML = "Editing";
+	tableRow.appendChild(tableHeading);
+	tableRow.appendChild(tableHeading1);
+	tab.appendChild(tableRow);
+	array.forEach((a,i)=>{
+	var tableRow1 = document.createElement("tr");
+	var data1 = document.createElement("td");
+	data1.innerHTML = a.name;              
+	var btn = document.createElement("button");
+	btn.innerHTML = "Edit";
+	btn.onclick = ()=>{
+	i1.value=a.name;
+	regen();
+	}
+	tableRow1.appendChild(data1);
+	tableRow1.appendChild(btn);
+	tab.appendChild(tableRow1);
+	<!-- t1.style.display = "block"; -->
+	})
+	}
+	function add(){
+	var textbox = document.getElementById("i1");
+		var object = {
+			name:textbox.value
+		};
+		array.push(object);
+		regen();
+	}
+	</script>
+</body>
+</html>

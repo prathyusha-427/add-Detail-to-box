@@ -1,0 +1,38 @@
+<html>
+<body>
+	<div id = "d1">
+	FirstName:<input type = "text" id = "i1">
+	LastName:<input type = "text" id = "i2">
+	Place:<input type = "text" id = "i3"><br>
+	</div>
+	<button>Store</button>
+	<script>
+		var array = [];
+		if(localStorage.getItem("name")){
+		array = JSON.parse(localStorage.getItem("name"));
+		genbox();
+		}
+		var fName = document.getElementById("i1");
+		var lName = document.getElementById("i2");
+		var place = document.getElementById("i3");
+		
+		function genbox()=>{
+		var inputdata = document.getElementById("d1");
+		array.forEach(a)=>({
+		var bx = document.createElement("box");
+		bx.innerHTML = inputdata.value;
+		}
+		onclick store()=>{
+			object = {
+				Fn:fName.value,
+				Ln:lName.value,
+				p:place.value
+			}
+			array.push(object);
+			genbox();
+			localStorage.setItem("name",JSON.stringify(object));
+		}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<html>
+<script>
+   var array =[
+		{
+			"name" : "prathyusha",
+			"place" : "vijayawada",
+			"college" : "jntuk",		
+		},
+		{
+			"name" : "Saraswathi",
+			"place" : "vizag",
+			"college" : "anits",		
+		},
+		{
+			"name" : "Vardhan",
+			"place" : "chennai",
+			"college" : "satyabama",		
+		},
+		{
+			"name" : "bannu",
+			"place" : "kansas",
+			"college" : "umkc",		
+		}
+   ]
+   var xyz = JSON.parse(JSON.stringify(array));
+   xyz.sort(function(a,b){
+	var letters1 = a.name.toUpperCase();
+	var letters2 = b.name.toUpperCase();
+	if(a.name < b.name){
+		return -1;
+	}
+   if(a.name > b.name){
+		return 1;
+	}
+	return 0;
+   });
+   console.log(array);
+   console.log(xyz);
+   
+</script>
+</html>
